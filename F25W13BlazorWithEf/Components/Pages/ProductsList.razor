@@ -1,0 +1,27 @@
+﻿@page "/products"
+@inject AppDbContext Db
+
+<h3>Products List</h3>
+
+@if (products == null)
+{
+    <p>No products found</p>
+}
+else
+{
+    <ul>
+        @foreach (var p in products)
+        {
+            <li>@p.Name - @(p.Price != null ? p.Price.Value.ToString("C") : ""</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<Product>? products;
+
+    protected override void OnInitialized()
+    {
+        products = Db.Products.ToList();
+    }
+}
