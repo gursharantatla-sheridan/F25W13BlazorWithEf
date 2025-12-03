@@ -1,5 +1,6 @@
 ﻿@page "/products"
-@inject AppDbContext Db
+@* @inject AppDbContext Db *@
+@inject ProductService ProdServ
 
 <h3>Products List</h3>
 
@@ -20,8 +21,8 @@ else
 @code {
     private List<Product>? products;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        products = Db.Products.ToList();
+        products = await ProdServ.GetProductsAsync();
     }
 }
